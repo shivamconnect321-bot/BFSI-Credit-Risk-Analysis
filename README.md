@@ -1,49 +1,3 @@
-# BFSI Credit Risk Analysis
-### End-to-End Data Analytics Project | Excel · Power Query · Python · Power BI · MySQL
-
-> Analyzed 51,336 loan applicants across 87 variables to identify default risk patterns for a leading Indian bank — uncovering that credit score is the strongest P1→P4 separator while missed payments alone is a weak and counter-intuitive signal.
-
----
-
-## Business Problem
-
-A leading Indian bank needs to distinguish loan applicants likely to **repay (P1/P2)** from those likely to **default (P3/P4)** — using internal tradeline behavior and external CIBIL credit profiles — to reduce NPA exposure and strengthen credit decisions.
-
-**26% of applicants (13,334 customers) fall in the default risk category (P3+P4).** Identifying them early is critical.
-
----
-
-## Dataset
-
-**Source:** [Leading Indian Bank and CIBIL Real-World Dataset — Kaggle](https://www.kaggle.com/datasets/saurabhbadole/leading-indian-bank-and-cibil-real-world-dataset)
-
-This is a real-world dataset representing loan applicants of a leading Indian bank. It contains two separate files — internal bank tradeline data and external CIBIL credit bureau data — joined on a unique customer identifier (PROSPECTID). The dataset covers customer demographics, credit history, delinquency behavior, enquiry patterns, and a risk classification target variable (Approved_Flag).
-
-| Dataset | Rows | Columns | Contains |
-|---------|------|---------|--------|
-| Internal Bank Dataset | 51,336 | 26 | Tradeline behavior — active/closed loans, missed payments, tradeline age |
-| External CIBIL Dataset | 51,336 | 62 | Credit score, delinquency history, enquiries, demographics |
-| **Merged Dataset (Final)** | **51,336** | **87** | Inner join on PROSPECTID |
-
-**Target Variable:** `Approved_Flag`
-
-| Risk Tier | Count | Percentage | Meaning |
-|-----------|-------|------------|---------|
-| P1 | 5,803 | 11.3% | Lowest risk — strongest applicants |
-| P2 | 32,199 | 62.7% | Moderate risk — largest segment |
-| P3 | 7,452 | 14.5% | High risk |
-| P4 | 5,882 | 11.5% | Highest risk — likely defaulters |
-
-> **Note:** Dataset is imbalanced. P2 dominates at 63%. Default risk (P3+P4) = 26% of total applicants.
-
----
-
-## Project Pipeline
-
-```
-Raw Data → Excel Cleaning → Power Query Merge → Python EDA → Power BI Dashboard → MySQL SQL Analysis
-```
-
 ---
 
 ## Phase 1 — Data Understanding (Excel)
@@ -57,6 +11,9 @@ Raw Data → Excel Cleaning → Power Query Merge → Python EDA → Power BI Da
 - Missed Payments: Avg = 0.55, Max = 34 — large gap signals extreme outliers
 - Education: 7 categories — SSC, 12TH, GRADUATE, UNDER GRADUATE, POST-GRADUATE, PROFESSIONAL, OTHERS
 
+![Raw Internal Bank Data](Screenshots/01_raw_internal_bank_data_png.png)
+![CIBIL Missing Values -99999](Screenshots/03_missing_values_99999_png.png)
+
 ---
 
 ## Phase 2 — Data Cleaning & Merging (Excel + Power Query)
@@ -67,6 +24,10 @@ Raw Data → Excel Cleaning → Power Query Merge → Python EDA → Power BI Da
 - Duplicate check: **0 duplicate PROSPECTIDs** in both datasets ✓
 - Merged using **Power Query Inner Join** on PROSPECTID
 - Final: **51,336 rows × 87 columns**
+
+![Merged Dataset 87 Columns](Screenshots/04_merged_cleaned_dataset_png.png)
+![Power Query Merge Result](Screenshots/05_power_query_merge_result.png)
+![Power Query NestedJoin on PROSPECTID](Screenshots/06_power_query_nested_join.png)
 
 ---
 
@@ -91,6 +52,12 @@ Raw Data → Excel Cleaning → Power Query Merge → Python EDA → Power BI Da
 | Default risk across all education levels | Education is not a reliable filter |
 | Credit scores concentrated at 650–700 | Majority are borderline-quality applicants |
 
+![Approved Flag Distribution](Screenshots/07_python_approved_flag_distribution.png)
+![Credit Score Box Plot by Risk Tier](Screenshots/08_python_credit_score_boxplot.png)
+![Credit Score Histogram](Screenshots/09_python_credit_score_histogram.png)
+![Missed Payments by Risk Tier](Screenshots/10_python_missed_payments.png)
+![Education Level by Risk Category](Screenshots/11_python_education_risk_breakdown.png)
+
 ---
 
 ## Phase 4 — Power BI Dashboard
@@ -105,6 +72,9 @@ Raw Data → Excel Cleaning → Power Query Merge → Python EDA → Power BI Da
 **Slicer:** Approved_Flag — filters all visuals dynamically
 
 **Dashboard Narrative:** Credit score separates risk tiers cleanly. Missed payments does not. Default risk is education-agnostic — the bank cannot use education level as a screening filter.
+
+![Power BI Dashboard Overview](Screenshots/12_powerbi_dashboard_overview.png)
+![Power BI Dashboard Filtered to P4](Screenshots/13_powerbi_dashboard_p4_filter.png)
 
 ---
 
@@ -128,6 +98,15 @@ Raw Data → Excel Cleaning → Power Query Merge → Python EDA → Power BI Da
 - Credit score avg: **715.95 (P1) → 645.63 (P4)** — 70-point gap between best and worst tier
 - Largest segment: **Fair credit score band (650–699)**
 - Education has no consistent relationship with risk tier
+
+![SQL Query 1 - Risk Tier Distribution](Screenshots/14_sql_query1_risk_tier_distribution.png)
+![SQL Query 2 - Credit Score by Tier](Screenshots/15_sql_query2_credit_score_by_tier.png)
+![SQL Query 3 - Missed Payments](Screenshots/16_sql_query3_missed_payments.png)
+![SQL Query 4 - Default Rate](Screenshots/17_sql_query4_default_rate.png)
+![SQL Query 5 - Education Risk Breakdown](Screenshots/18_sql_query5_education_risk_breakdown.png)
+![SQL Query 6 - High Risk Customer Profile](Screenshots/19_sql_query6_high_risk_customer_profile.png)
+![SQL Query 7 - Credit Score Bucketing](Screenshots/20_sql_query7_credit_score_bucketing.png)
+![SQL Query 8 - Rank Window Function](Screenshots/21_sql_query8_rank_window_function.png)
 
 ---
 
