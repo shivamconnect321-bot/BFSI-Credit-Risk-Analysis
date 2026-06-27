@@ -164,6 +164,28 @@ Raw Data → Excel Cleaning → Power Query Merge → Python EDA → Power BI Da
 
 ---
 
+## Business Recommendations
+
+Based on analysis of 51,336 loan applicants across 87 variables, the following actions are recommended to the credit risk team:
+
+| # | Recommendation | Data Evidence |
+|---|---------------|---------------|
+| 1 | **Implement a 650 credit score floor** — applicants below 650 should require additional collateral or guarantor before approval | P4 avg credit score = 645.63; Poor band (below 650) = 2,704 customers at highest default risk |
+| 2 | **Replace missed payments as standalone filter** — combine it with credit score for reliable screening | P1 customers average 0.96 missed payments — higher than P3 (0.53) and P4 (0.66); using missed payments alone rejects good customers |
+| 3 | **Remove education as a credit screening criterion** — it adds no predictive value and creates regulatory bias risk | P2 dominates at 60-65% across every education category from SSC to POST-GRADUATE |
+| 4 | **Launch a P2 upgrade program** — targeted engagement with borderline P2 customers to improve credit behavior | P2 = 32,199 customers (62.7%); converting even 10% to P1 behavior adds ~3,200 low-risk accounts to portfolio |
+| 5 | **Build an early warning system for P3 accounts** — proactive intervention before P3 rolls to P4 | P3 = 7,452 customers (14.5%); avg credit score 667 vs P4's 645 — a 22-point gap that intervention can preserve |
+
+### Key Risk Thresholds Identified
+
+| Metric | Safe Zone | Warning Zone | Danger Zone |
+|--------|-----------|--------------|-------------|
+| Credit Score | Above 700 | 650 – 699 | Below 650 |
+| Risk Tier | P1 / P2 | P3 | P4 |
+| Default Exposure | 0% | 14.5% | 11.5% |
+
+> **Bottom Line:** Credit score is the single most reliable variable for loan approval decisions. A combined scorecard using credit score as primary filter and missed payments as secondary signal will reduce NPA exposure more effectively than any education or demographic-based screening.---
+
 ## Tools & Technologies
 
 | Tool | Purpose |
