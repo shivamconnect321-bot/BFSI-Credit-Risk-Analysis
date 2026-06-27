@@ -69,6 +69,8 @@ Raw Data → Excel Cleaning → Power Query Merge → Python EDA → Power BI Da
 - Merged using **Power Query Inner Join** on PROSPECTID
 - Final: **51,336 rows × 87 columns**
 
+![Missing Value Treatment Categories](Screenshots/04b_missing_value_treatment_category.png)
+![Median Replacement Values](Screenshots/04c_missing_value_median_replacements.png)
 ![Merged Dataset 87 Columns](Screenshots/04_merged_cleaned_dataset.png.png)
 ![Power Query Merge Result](Screenshots/05_power_query_merge_result.png.png)
 ![Power Query NestedJoin on PROSPECTID](Screenshots/06_power_query_nested_join.png.png)
